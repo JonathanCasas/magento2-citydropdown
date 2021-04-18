@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="url" xsi:type="string">admin/system_config/edit/section/ea_romcity</item>
+            </item>
+        </item>
+    </argument>
+    <columns name="city_columns">
+        <column name="city_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">City Code</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

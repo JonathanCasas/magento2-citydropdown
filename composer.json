@@ -1,0 +1,41 @@
+{
+    "name": "esatic/dropdowncity",
+    "description": "A module that adds checkout city field to checkout quote shipping address",
+    "type": "magento2-module",
+    "version": "2.0.1",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Esatic\\DropdownCity\\": ""
+        }
+    },
+    "license": "AL-2.0",
+    "authors": [
+        {
+            "name": "EAdesign By Eco Active SRL",
+            "email": "office@eadesign.ro",
+            "homepage": "https://www.eadesign.ro",
+            "role": "Developer"
+        },
+        {
+            "name": "Esatic S.A.S",
+            "email": "jonathan.casas@esatic.com",
+            "homepage": "https://www.esatic.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "jonathan.casas@esatic.com"
+    },
+    "require": {
+        "php": ">=7.2",
+        "magento/magento2-base": ">=2.3",
+        "magento/module-backend": "*",
+        "magento/module-sales": "*",
+        "magento/module-customer": "*",
+        "eadesignro/module-eacore": ">=0.3",
+        "eadesignro/romcity": "^2.0"
+    }
+}
