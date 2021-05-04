@@ -4,4 +4,6 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Eadesigndev\RomCity\Controller\Adminhtml\Index\Upload"
                 type="Esatic\DropdownCity\Controller\Adminhtml\Index\Upload"/>
+    <preference for="Eadesigndev\RomCity\Api\Data\RomCityInterface"
+                type="Esatic\DropdownCity\Model\RomCity"/>
 </config>
