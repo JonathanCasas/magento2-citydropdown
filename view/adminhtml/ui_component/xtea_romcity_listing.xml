@@ -1,6 +1,32 @@
 <?xml version="1.0"?>
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <container name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="visible" xsi:type="boolean">false</item>
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="dropdown/index/MassDelete/"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete Cities</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete
+                                selected Cities?
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <visible>false</visible>
+                </settings>
+            </action>
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </massaction>
+    </container>
     <argument name="data" xsi:type="array">
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
@@ -9,6 +35,11 @@
         </item>
     </argument>
     <columns name="city_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
         <column name="city_code">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

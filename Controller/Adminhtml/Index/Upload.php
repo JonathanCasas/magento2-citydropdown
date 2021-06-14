@@ -11,6 +11,7 @@ use Eadesigndev\RomCity\Model\ResourceModel\Collection\Collection;
 use Eadesigndev\RomCity\Model\ResourceModel\Collection\CollectionFactory;
 use Eadesigndev\RomCity\Model\RomCityFactory;
 use Eadesigndev\RomCity\Model\RomCityRepository;
+use Esatic\DropdownCity\Model\RomCity;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -57,7 +58,8 @@ class Upload extends Action
         RomCityFactory $romCityFactory,
         RomCityRepository $romCityRepository,
         Data $dataHelper
-    ) {
+    )
+    {
         $this->romCityRepository = $romCityRepository;
         $this->resultRedirect = $resultRedirect;
         $this->romCityFactory = $romCityFactory;
@@ -85,6 +87,9 @@ class Upload extends Action
         return $resultRedirect;
     }
 
+    /**
+     * @throws \Magento\Framework\Exception\FileSystemException
+     */
     public function readCsv()
     {
         $pubMediaDir = $this->directoryList->getPath(DirectoryList::MEDIA);
@@ -110,9 +115,17 @@ class Upload extends Action
                 $romCityRepository = $this->romCityFactory->create();
                 if (isset($entityId) && is_numeric($entityId)) {
                     $romCityRepository = $this->romCityRepository->getById($entityId);
+                    $romCityRepository->setRegionId($regionId);
                     $romCityRepository->setCityName($cityName);
                     $romCityRepository->setCityCode($cityCode);
                     $this->romCityRepository->save($romCityRepository);
+                    continue;
+                } else if (isset($cityCode) && !empty($cityCode)) {
+                    $romCity = $this->getCityByCode($cityCode);
+                    $romCity->setRegionId($regionId);
+                    $romCity->setCityCode($cityCode);
+                    $romCity->setCityName($cityName);
+                    $this->romCityRepository->save($romCity);
                     continue;
                 }
 
@@ -164,5 +177,16 @@ class Upload extends Action
             $csvDataProcessed[] = $csvValueProcessed;
         }
         return [$collection, $csvDataProcessed];
+    }
+
+    /**
+     * @param string $code
+     * @param array $row
+     * @return \Magento\Framework\DataObject|RomCity
+     */
+    private function getCityByCode(string $code)
+    {
+        $collection = $this->collectionFactory->create();
+        return $collection->addFieldToFilter('city_code', array('eq' => $code))->load()->getFirstItem();
     }
 }
